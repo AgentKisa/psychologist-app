@@ -1,0 +1,94 @@
+.header {
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    color: #3470FF;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+}
+
+.logoSpan {
+    color: #191A15;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.4px;
+    font-family: Inter;
+}
+
+.nav {
+    display: flex;
+}
+
+.navLink {
+    margin-left: 20px;
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+}
+
+.navLink:hover {
+    color: #007bff;
+}
+
+.authButtons {
+    display: flex;
+}
+
+.authButton {
+    margin-left: 10px;
+    padding: 14px 39px;
+    border: 1px solid rgba(25, 26, 21, 0.20);
+    border-radius: 30px;
+    background-color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+}
+
+.authButton2 {
+    margin-left: 10px;
+    padding: 14px 39px;
+    border: 1px solid rgba(25, 26, 21, 0.20);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+}
+
+.authButton:hover {
+    background-color: #0056b3;
+}
+
+.authButton2:hover {
+    background-color: #0056b3;
+}
