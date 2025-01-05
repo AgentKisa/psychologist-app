@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import RegisterModal from "../Modal/RegisterModal";
 import LoginModal from "../Modal/LoginModal";
-import { useAuth } from "../../../utils/auth";
+import { useAuth } from "../../utils/auth";
 const Header = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

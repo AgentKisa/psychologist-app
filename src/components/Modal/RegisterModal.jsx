@@ -3,10 +3,9 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useAuth } from "../../../utils/auth";
+import { useAuth } from "../../utils/auth";
 import { useEffect } from "react";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../../../utils/firebase";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -15,12 +14,11 @@ const schema = yup.object().shape({
 });
 
 const RegisterModal = ({ onClose }) => {
-  const { register: firebaseRegister, loading } = useAuth();
+  const { register, loading, auth } = useAuth();
   const {
-    register,
+    register: registerForm,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -86,13 +84,13 @@ const RegisterModal = ({ onClose }) => {
         </button>
         <h2>Register</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("email")} type="email" placeholder="Email" />
+          <input {...registerForm("email")} type="email" placeholder="Email" />
           {errors.email && (
             <p className="error-message">{errors.email.message}</p>
           )}
 
           <input
-            {...register("password")}
+            {...registerForm("password")}
             type="password"
             placeholder="Password"
           />
@@ -100,7 +98,7 @@ const RegisterModal = ({ onClose }) => {
             <p className="error-message">{errors.password.message}</p>
           )}
 
-          <input {...register("name")} type="text" placeholder="Name" />
+          <input {...registerForm("name")} type="text" placeholder="Name" />
           {errors.name && (
             <p className="error-message">{errors.name.message}</p>
           )}

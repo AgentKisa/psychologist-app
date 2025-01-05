@@ -1,0 +1,63 @@
+/* PsychologistCard.module.css */
+.card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    /* Ensures image fills container */
+}
+
+.info {
+    flex: 1;
+    /* Allows info to fill remaining space */
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.experience,
+.price,
+.specialization {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ratingStars {
+    font-size: 18px;
+    /* Adjust for star size */
+    color: #ffc107;
+    /* Gold color for stars */
+}
+
+.ratingValue {
+    margin-left: 5px;
+    color: #333;
+}
+
+.about {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
