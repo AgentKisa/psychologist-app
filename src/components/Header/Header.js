@@ -9,7 +9,7 @@ import { useAuth } from "../../utils/auth";
 const Header = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { user, logout } = useAuth(); // <--- Используем хук useAuth
+  const { user, logout } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -24,9 +24,14 @@ const Header = () => {
           <Link href="/psychologists" className={styles.navLink}>
             Psychologists
           </Link>
+          {user && (
+            <Link href="/favorites" className={styles.navLink}>
+              Favorites
+            </Link>
+          )}
         </nav>
         <div className={styles.authButtons}>
-          {!user && ( // <--- Условный рендеринг кнопок
+          {!user && (
             <>
               <button
                 onClick={() => setIsLoginModalOpen(true)}
@@ -42,7 +47,7 @@ const Header = () => {
               </button>
             </>
           )}
-          {user && ( // <--- Кнопка выхода для залогиненного пользователя
+          {user && (
             <div className={styles.userSection}>
               <span className={styles.userName}>
                 Welcome, {user.displayName || "User"}
@@ -55,7 +60,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* <--- Отображаем модальные окна */}
       {isRegisterModalOpen && (
         <RegisterModal
           isOpen={isRegisterModalOpen}

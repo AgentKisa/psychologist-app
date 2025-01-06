@@ -23,6 +23,11 @@ const PsychologistsPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [sortBy, setSortBy] = useState("alphabet");
   const [page, setPage] = useState(1); // Состояние для номера страницы
+  const [expandedPsychologistId, setExpandedPsychologistId] = useState(null);
+
+  const handleExpand = (id) => {
+    setExpandedPsychologistId((prevId) => (prevId === id ? null : id));
+  };
 
   const handleFilterChange = (e) => {
     setSortBy(e.target.value);
@@ -134,6 +139,8 @@ const PsychologistsPage = () => {
             <PsychologistCard
               key={`${psychologist.id}-${index}`}
               psychologist={psychologist}
+              isExpanded={expandedPsychologistId === psychologist.name}
+              onExpand={() => handleExpand(psychologist.name)}
             />
           ))}
           {hasMore && (

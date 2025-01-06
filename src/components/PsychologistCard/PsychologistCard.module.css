@@ -1,63 +1,83 @@
-/* PsychologistCard.module.css */
 .card {
-    display: flex;
-    align-items: center;
-    padding: 20px;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin-bottom: 16px;
     background-color: #fff;
-    margin-bottom: 20px;
+}
+
+.head {
+    margin-bottom: 16px;
 }
 
 .avatar {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    margin-right: 20px;
-    object-fit: cover;
-    /* Ensures image fills container */
-}
-
-.info {
-    flex: 1;
-    /* Allows info to fill remaining space */
+    margin-bottom: 16px;
 }
 
 .name {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
+    margin: 0;
 }
 
+.specialization,
 .experience,
 .price,
-.specialization {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 5px;
+.rating,
+.license,
+.initialConsultation {
+    margin: 4px 0;
 }
 
-.rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.toggleButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
-.ratingStars {
-    font-size: 18px;
-    /* Adjust for star size */
-    color: #ffc107;
-    /* Gold color for stars */
+.toggleButton:hover {
+    background-color: #0056b3;
 }
 
-.ratingValue {
-    margin-left: 5px;
-    color: #333;
+.details {
+    margin-top: 16px;
 }
 
 .about {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.reviewsTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.reviewsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review {
+    border-top: 1px solid #ccc;
+    padding: 8px 0;
+}
+
+.review:first-of-type {
+    border-top: none;
+}
+
+.heartButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    fill: none;
+    stroke: #191A15;
 }
