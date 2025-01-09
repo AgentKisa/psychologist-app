@@ -1,6 +1,13 @@
 import styles from "./PsychologistCard.module.css";
 
-const PsychologistCard = ({ psychologist, isExpanded, onExpand }) => {
+const PsychologistCard = ({
+  psychologist,
+  isExpanded,
+  onExpand,
+  isFavorite,
+  toggleFavorite,
+  onOpenModal,
+}) => {
   return (
     <article className={styles.card}>
       <img
@@ -19,9 +26,21 @@ const PsychologistCard = ({ psychologist, isExpanded, onExpand }) => {
         </p>
         <p className={styles.price}>
           Price per hour: ${psychologist.price_per_hour}{" "}
-          <button className={styles.heartButton} aria-label="Add to Favorites">
+          <button
+            className={`${styles.heartButton} ${isFavorite ? styles.filledHeart : ""}`}
+            aria-label={
+              isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            }
+            onClick={toggleFavorite}
+          >
             <svg width="26" height="24">
-              <use href="/sprite.svg#icon-Property"></use>
+              <use
+                href={
+                  isFavorite
+                    ? "/sprite.svg#icon-Property"
+                    : "/sprite.svg#icon-Property"
+                }
+              ></use>
             </svg>
           </button>
         </p>
@@ -54,7 +73,10 @@ const PsychologistCard = ({ psychologist, isExpanded, onExpand }) => {
             ))}
           </ul>
           <div className={styles.appointment}>
-            <button className={styles.appointmentButton}>
+            <button
+              className={styles.appointmentButton}
+              onClick={() => onOpenModal(psychologist)}
+            >
               Make an appointment
             </button>
           </div>

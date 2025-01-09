@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../utils/auth";
 import { getDatabase, ref, get, query, limitToFirst } from "firebase/database";
+import { useAuth } from "../../utils/auth";
 import { app } from "../../utils/firebase";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
+import AppointmentModal from "../../components/Modal/AppointmentModal";
 
 const PsychologistsPage = () => {
   let db;
@@ -24,6 +25,9 @@ const PsychologistsPage = () => {
   const [sortBy, setSortBy] = useState("alphabet");
   const [page, setPage] = useState(1); // Состояние для номера страницы
   const [expandedPsychologistId, setExpandedPsychologistId] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPsychologist, setSelectedPsychologist] = useState(null);
 
   const handleExpand = (id) => {
     setExpandedPsychologistId((prevId) => (prevId === id ? null : id));
@@ -38,6 +42,10 @@ const PsychologistsPage = () => {
   useEffect(() => {
     if (user && !loading) {
       fetchAllPsychologists();
+      const storedFavorites = localStorage.getItem(`favorites_${user.uid}`);
+      if (storedFavorites) {
+        setFavorites(JSON.parse(storedFavorites));
+      }
     }
   }, [user, loading]);
 
@@ -110,6 +118,32 @@ const PsychologistsPage = () => {
     setHasMore(sortedPsychologists.length > page * 3);
   };
 
+  // Функция для управления добавлением/удалением из избранного
+  const toggleFavorite = (psychologistId) => {
+    const updatedFavorites = favorites.includes(psychologistId)
+      ? favorites.filter((id) => id !== psychologistId)
+      : [...favorites, psychologistId];
+
+    console.log("Updated favorites:", updatedFavorites);
+    setFavorites(updatedFavorites);
+    if (user) {
+      localStorage.setItem(
+        `favorites_${user.uid}`,
+        JSON.stringify(updatedFavorites),
+      );
+    }
+  };
+
+  const handleOpenModal = (psychologist) => {
+    setSelectedPsychologist(psychologist);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPsychologist(null);
+    setIsModalOpen(false);
+  };
+
   if (loading) {
     return <div>Loading user...</div>;
   }
@@ -141,6 +175,9 @@ const PsychologistsPage = () => {
               psychologist={psychologist}
               isExpanded={expandedPsychologistId === psychologist.name}
               onExpand={() => handleExpand(psychologist.name)}
+              isFavorite={favorites.includes(psychologist.id)}
+              toggleFavorite={() => toggleFavorite(psychologist.id)}
+              onOpenModal={handleOpenModal} // Передаем функцию открытия модального окна
             />
           ))}
           {hasMore && (
@@ -150,6 +187,15 @@ const PsychologistsPage = () => {
           )}
         </div>
       )}
+
+      {isModalOpen &&
+        selectedPsychologist && ( // Проверяем, открыто ли модальное окно и выбран ли психолог
+          <AppointmentModal
+            psychologist={selectedPsychologist} // Передаем выбранного психолога
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+          />
+        )}
     </div>
   );
 };

@@ -1,0 +1,86 @@
+/* TimePicker.module.css */
+.timePickerContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.timeInput {
+    padding: 16px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(25, 26, 21, 0.10);
+    cursor: pointer;
+    width: 232px;
+    box-sizing: border-box;
+    background-color: transparent;
+    height: 52px;
+}
+
+.timeInput::placeholder {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 151px;
+    max-height: 180px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    /* Возвращаем scroll */
+}
+
+.dropdownHeader {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    z-index: 2;
+    /* Увеличиваем z-index, чтобы перекрывать полосу прокрутки */
+    box-sizing: border-box;
+}
+
+.dropdownContent {
+    /* Добавляем стили для контента */
+    padding-top: 30px;
+    /* Отступ под заголовок */
+}
+
+.timeOption {
+    padding: 8px 12px;
+    cursor: pointer;
+    height: 30px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Центрируем по горизонтали */
+    color: #808080;
+    /* Серый цвет по умолчанию */
+}
+
+.timeOption:hover {
+    background-color: #f0f0f0;
+}
+
+.focusedTimeOption {
+    /* Стили для выделенного времени */
+    color: #000;
+    /* Черный цвет */
+    font-weight: bold;
+    background-color: #e0e0e0;
+    /*легкий серый фон для выделения*/
+}
