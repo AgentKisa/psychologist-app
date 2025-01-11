@@ -1,92 +1,320 @@
 .card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    background-color: #fff;
+    background-color: #FFFFFF;
+    /* Белый фон */
+    border-radius: 24px;
+    box-sizing: border-box;
+    padding: 24px 0px 0px 0px;
+    width: 1184px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    margin: 0 auto;
 }
 
-.head {
-    margin-bottom: 16px;
+
+.cardContainer {
+    margin-bottom: 32px;
+}
+
+
+.cardImg {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 16px;
+    width: 96px;
+    height: 96px;
+    border-radius: 30%;
+    display: block;
+    padding: 12px;
+    border: 1px solid rgba(52, 112, 238, 0.5);
+}
+
+.cardImg svg {
+    position: absolute;
+    top: 23px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
+    fill: #38C22B;
+}
+
+.head {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    color: #8A8A89;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.headTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-.specialization,
-.experience,
-.price,
-.rating,
-.license,
-.initialConsultation {
-    margin: 4px 0;
-}
-
-.toggleButton {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.toggleButton:hover {
-    background-color: #0056b3;
-}
-
-.details {
-    margin-top: 16px;
-}
-
-.about {
-    margin-bottom: 16px;
-}
-
-.reviewsTitle {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    /* Шрифт Inter */
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #333333;
     margin-bottom: 8px;
 }
 
-.reviewsList {
-    list-style-type: none;
-    padding: 0;
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 900px;
+    margin-bottom: 16px;
+    gap: 4px;
 }
 
-.review {
-    border-top: 1px solid #ccc;
-    padding: 8px 0;
+.experience,
+.specialization,
+.license,
+.initialConsultation {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 4px;
+    padding: 8px 13px;
+    border-radius: 24px;
+    background: #F3F3F3;
+    border: transparent;
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
 }
 
-.review:first-of-type {
-    border-top: none;
+.label {
+    color: #9B9B9B;
+    margin-right: 4px;
+}
+
+.description {
+    color: #8A8A89;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 48px;
+}
+
+.priceRating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    align-items: center;
+    margin-left: 16px;
+    display: flex;
+}
+
+.priceLabel {
+    color: #333333;
+    margin-right: 3px;
+}
+
+.priceRating .price {
+    color: #38C22B;
 }
 
 .heartButton {
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
-    fill: none;
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
     stroke: #191A15;
+    fill: transparent;
 }
 
-.filledHeart {
-    background: none;
+
+.heartButton.filledHeart {
+    fill: #3470FF;
+    stroke: none;
+}
+
+.rating {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    display: flex;
+    padding-right: 16px;
+    border-right: 1px solid rgba(25, 26, 21, 0.20);
+    min-height: 16px;
+    gap: 8px;
+    align-items: center;
+}
+
+
+
+
+.toggleButton {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    text-align: left;
+    margin-bottom: 24px;
+    background-color: transparent;
     border: none;
+}
+
+.details {
+    margin-top: 0;
+}
+
+.about {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333333;
+    margin-bottom: 16px;
+}
+
+.reviewsList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.review {
+    display: flex;
+    flex-wrap: wrap;
+    width: 760px;
+    margin-bottom: 25px;
+}
+
+.review:last-child {
+    margin-bottom: 40px;
+}
+
+.reviewAvatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(52, 112, 255, 0.20);
+    color: #3470FF;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.reviewContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewerInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewerNameRating {
+    margin-bottom: 8px;
+}
+
+.reviewerName {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.ratingContainer {
+    display: flex;
+    align-items: center;
+}
+
+.starIcon {
+    width: 16px;
+    height: 16px;
+    fill: #F2C94C;
+    margin-right: 4px;
+    margin-bottom: 2px;
+}
+
+.ratingValue {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+}
+
+.comment {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #9B9B9B;
+    opacity: 0.7;
+    margin: 0;
+    margin-top: 8px;
+}
+
+.appointment {
+    display: flex;
+    justify-content: left;
+    align-items: right;
+    text-align: right;
+}
+
+.appointmentButton {
+    color: #FBFBFB;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+    border: none;
+    border-radius: 30px;
+    background: #3470FF;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 1.5rem;
-    fill: #191A15;
-    stroke: #191A15;
+    transition: background-color 0.2s ease-in-out;
+    padding: 14px 32px;
+
+}
+
+.appointmentButton:hover {
+    background: #255EE8;
 }

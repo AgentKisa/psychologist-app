@@ -7,9 +7,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: center;
     max-width: 1184px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0px;
 }
 
 .logo {
@@ -32,6 +33,7 @@
 
 .nav {
     display: flex;
+    height: 20px;
 }
 
 .navLink {
@@ -42,25 +44,29 @@
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.16px;
+    position: relative;
 }
 
-.navLink:hover {
-    color: #007bff;
+.navIcon {
+    display: block;
+    margin: 4px auto 0;
+    /* Центрируем иконку под текстом */
 }
 
 .authButtons {
     display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .authButton {
-    margin-left: 10px;
     padding: 14px 39px;
     border: 1px solid rgba(25, 26, 21, 0.20);
     border-radius: 30px;
-    background-color: #007bff;
+    background-color: transparent;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    color: white;
+    color: #191A15;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
@@ -76,19 +82,44 @@
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    color: #191A15;
+    color: white;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
     letter-spacing: -0.16px;
+    background: #3470FF;
 }
 
-.authButton:hover {
-    background-color: #0056b3;
-}
-
+.authButton:hover,
 .authButton2:hover {
-    background-color: #0056b3;
+    background: #255EE8;
+}
+
+.userSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #3470FF;
+    border-radius: 10px;
+    color: white;
+}
+
+.userName {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+    margin-right: 14px;
 }

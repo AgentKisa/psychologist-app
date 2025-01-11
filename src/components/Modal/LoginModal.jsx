@@ -78,7 +78,7 @@ const LoginModal = ({ isOpen, onRequestClose }) => {
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          // transform: "translate(-50%, -50%)",
           width: "400px", // Adjust width as needed
           border: "1px solid #ccc",
           background: "#fff",

@@ -1,38 +1,28 @@
-import {
-  query,
-  orderByChild,
-  startAfter,
-  limitToFirst,
-} from "firebase/database";
-
-export const getSortedQuery = (ref, sortBy, lastVisibleValue) => {
-  const pageSize = 3; // Количество элементов на странице
-  let dbQuery;
-
-  switch (sortBy) {
-    case "alphabet":
-    case "alphabetDesc":
-      dbQuery = orderByChild("name");
-      break;
-    case "price":
-    case "priceDesc":
-      dbQuery = orderByChild("price_per_hour");
-      break;
-    case "popularity":
-    case "popularityDesc":
-      dbQuery = orderByChild("rating");
-      break;
-    default:
-      dbQuery = orderByChild("name");
-  }
-
-  if (lastVisibleValue) {
-    return query(
-      ref,
-      dbQuery,
-      startAfter(lastVisibleValue),
-      limitToFirst(pageSize),
+export const sortPsychologists = (dataArray, sortBy) => {
+  if (sortBy === "alphabet") {
+    dataArray.sort((a, b) =>
+      a.name.localeCompare(b.name, "ru-RU", { sensitivity: "base" }),
     );
+  } else if (sortBy === "alphabetDesc") {
+    dataArray.sort((a, b) =>
+      b.name.localeCompare(a.name, "ru-RU", { sensitivity: "base" }),
+    );
+  } else if (sortBy === "price") {
+    dataArray.sort((a, b) => a.price_per_hour - b.price_per_hour);
+  } else if (sortBy === "priceDesc") {
+    dataArray.sort((a, b) => b.price_per_hour - a.price_per_hour);
+  } else if (sortBy === "popularity") {
+    dataArray.sort((a, b) => a.rating - b.rating);
+  } else if (sortBy === "popularityDesc") {
+    dataArray.sort((a, b) => b.rating - a.rating);
   }
-  return query(ref, dbQuery, limitToFirst(pageSize));
+};
+
+export const sortAndDisplayPsychologists = (dataArray, sortBy, page) => {
+  const sortedPsychologists = [...dataArray];
+  sortPsychologists(sortedPsychologists, sortBy);
+  return {
+    displayed: sortedPsychologists.slice(0, page * 3),
+    hasMore: sortedPsychologists.length > page * 3,
+  };
 };

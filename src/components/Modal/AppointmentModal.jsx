@@ -6,6 +6,26 @@ import * as yup from "yup";
 import styles from "./AppointmentModal.module.css";
 import TimePicker from "./TimePicker";
 
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.50)",
+    zIndex: 10,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "8px",
+    border: "none",
+    padding: "0px",
+    maxWidth: "90vw",
+    zIndex: 11,
+  },
+};
+
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   phone: yup
@@ -17,7 +37,7 @@ const schema = yup.object().shape({
   comment: yup.string().required("Comment is required"),
 });
 
-Modal.setAppElement(document.body);
+Modal.setAppElement("body");
 
 const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
   const {
@@ -38,8 +58,19 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    onClose();
+    handleClose();
   };
+
+  const handleClose = () => {
+    onClose();
+    document.body.classList.remove("ReactModal__Body--open");
+  };
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      document.body.classList.remove("ReactModal__Body--open");
+    }
+  }, [isOpen]);
 
   if (!psychologist) {
     return null;
@@ -48,13 +79,8 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={() => {
-        console.log("onRequestClose вызван!"); // Проверяем, вызывается ли функция
-        onClose();
-      }}
-      className={styles.modal}
-      appElement={document.body}
-      overlayClassName={styles.overlay}
+      onRequestClose={handleClose}
+      style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
       <div className={styles.modalContent}>
@@ -132,7 +158,7 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
             Send
           </button>
         </form>
-        <button className={styles.closeBtn} onClick={onClose}>
+        <button className={styles.closeBtn} onClick={handleClose}>
           <svg width="32" height="32">
             <use href="/sprite.svg#icon-x"></use>
           </svg>

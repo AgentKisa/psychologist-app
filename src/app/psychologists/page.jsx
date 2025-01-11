@@ -5,6 +5,11 @@ import { useAuth } from "../../utils/auth";
 import { app } from "../../utils/firebase";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
 import AppointmentModal from "../../components/Modal/AppointmentModal";
+import PsychologistFilter from "@/components/PsychologistFilter/PsychologistFilter";
+import {
+  sortAndDisplayPsychologists,
+  getSortedQuery,
+} from "../../utils/sortPsychologists";
 
 const PsychologistsPage = () => {
   let db;
@@ -18,12 +23,12 @@ const PsychologistsPage = () => {
   }
 
   const { user, loading } = useAuth();
-  const [allPsychologists, setAllPsychologists] = useState([]); // Состояние для всех данных
-  const [displayedPsychologists, setDisplayedPsychologists] = useState([]); // Состояние для отображаемых данных
+  const [allPsychologists, setAllPsychologists] = useState([]);
+  const [displayedPsychologists, setDisplayedPsychologists] = useState([]);
   const [loadingPsychologists, setLoadingPsychologists] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [sortBy, setSortBy] = useState("alphabet");
-  const [page, setPage] = useState(1); // Состояние для номера страницы
+  const [page, setPage] = useState(1);
   const [expandedPsychologistId, setExpandedPsychologistId] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,10 +38,16 @@ const PsychologistsPage = () => {
     setExpandedPsychologistId((prevId) => (prevId === id ? null : id));
   };
 
-  const handleFilterChange = (e) => {
-    setSortBy(e.target.value);
-    sortAndDisplayPsychologists(e.target.value, 1);
-    setPage(1);
+  const onSort = (sortBy, page) => {
+    const sortedData = sortAndDisplayPsychologists(
+      allPsychologists,
+      sortBy,
+      page,
+    );
+    setDisplayedPsychologists(sortedData.displayed);
+    setHasMore(sortedData.hasMore);
+    setSortBy(sortBy);
+    setPage(page);
   };
 
   useEffect(() => {
@@ -63,10 +74,10 @@ const PsychologistsPage = () => {
           ...value,
         }));
 
-        sortDataArray(dataArray, sortBy);
+        const sortedData = sortAndDisplayPsychologists(dataArray, sortBy, 1);
         setAllPsychologists(dataArray); // Сохраняем все данные
-        setDisplayedPsychologists(dataArray.slice(0, 3)); // Отображаем первые 3 элемента
-        setHasMore(dataArray.length > 3);
+        setDisplayedPsychologists(sortedData.displayed); // Отображаем первые 3 элемента
+        setHasMore(sortedData.hasMore);
       } else {
         setAllPsychologists([]);
         setDisplayedPsychologists([]);
@@ -83,39 +94,13 @@ const PsychologistsPage = () => {
     const newPage = page + 1;
     setPage(newPage);
 
-    const sortedPsychologists = [...allPsychologists];
-    sortDataArray(sortedPsychologists, sortBy);
-
-    const newPsychologists = sortedPsychologists.slice(0, newPage * 3);
-    setDisplayedPsychologists(newPsychologists);
-    setHasMore(newPsychologists.length < allPsychologists.length);
-  };
-
-  const sortDataArray = (dataArray, sortBy) => {
-    if (sortBy === "alphabet") {
-      dataArray.sort((a, b) =>
-        a.name.localeCompare(b.name, "ru-RU", { sensitivity: "base" }),
-      );
-    } else if (sortBy === "alphabetDesc") {
-      dataArray.sort((a, b) =>
-        b.name.localeCompare(a.name, "ru-RU", { sensitivity: "base" }),
-      );
-    } else if (sortBy === "price") {
-      dataArray.sort((a, b) => a.price_per_hour - b.price_per_hour);
-    } else if (sortBy === "priceDesc") {
-      dataArray.sort((a, b) => b.price_per_hour - a.price_per_hour);
-    } else if (sortBy === "popularity") {
-      dataArray.sort((a, b) => a.rating - b.rating);
-    } else if (sortBy === "popularityDesc") {
-      dataArray.sort((a, b) => b.rating - a.rating);
-    }
-  };
-
-  const sortAndDisplayPsychologists = (sortBy, page) => {
-    const sortedPsychologists = [...allPsychologists];
-    sortDataArray(sortedPsychologists, sortBy);
-    setDisplayedPsychologists(sortedPsychologists.slice(0, page * 3));
-    setHasMore(sortedPsychologists.length > page * 3);
+    const sortedData = sortAndDisplayPsychologists(
+      allPsychologists,
+      sortBy,
+      newPage,
+    );
+    setDisplayedPsychologists(sortedData.displayed);
+    setHasMore(sortedData.hasMore);
   };
 
   // Функция для управления добавлением/удалением из избранного
@@ -150,20 +135,7 @@ const PsychologistsPage = () => {
 
   return (
     <div>
-      <h1>Psychologists</h1>
-
-      <select onChange={handleFilterChange} value={sortBy}>
-        <option value="alphabet">Sort by Alphabet (A to Z)</option>
-        <option value="alphabetDesc">Sort by Alphabet (Z to A)</option>
-        <option value="price">Sort by Price (Low to High)</option>
-        <option value="priceDesc">Sort by Price (High to Low)</option>
-        <option value="popularity">
-          Sort by Popularity (Lowest to Highest)
-        </option>
-        <option value="popularityDesc">
-          Sort by Popularity (Highest to Lowest)
-        </option>
-      </select>
+      <PsychologistFilter sortBy={sortBy} onSort={onSort} />
 
       {loadingPsychologists && displayedPsychologists.length === 0 ? (
         <div>Loading psychologists...</div>
@@ -177,7 +149,7 @@ const PsychologistsPage = () => {
               onExpand={() => handleExpand(psychologist.name)}
               isFavorite={favorites.includes(psychologist.id)}
               toggleFavorite={() => toggleFavorite(psychologist.id)}
-              onOpenModal={handleOpenModal} // Передаем функцию открытия модального окна
+              onOpenModal={handleOpenModal}
             />
           ))}
           {hasMore && (
@@ -188,14 +160,13 @@ const PsychologistsPage = () => {
         </div>
       )}
 
-      {isModalOpen &&
-        selectedPsychologist && ( // Проверяем, открыто ли модальное окно и выбран ли психолог
-          <AppointmentModal
-            psychologist={selectedPsychologist} // Передаем выбранного психолога
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-          />
-        )}
+      {isModalOpen && selectedPsychologist && (
+        <AppointmentModal
+          psychologist={selectedPsychologist}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

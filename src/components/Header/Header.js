@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import RegisterModal from "../Modal/RegisterModal";
 import LoginModal from "../Modal/LoginModal";
 import { useAuth } from "../../utils/auth";
+import { usePathname } from "next/navigation"; // Импортируем usePathname
+
 const Header = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { user, logout } = useAuth();
+  const pathname = usePathname(); // Используем usePathname
 
   return (
     <header className={styles.header}>
@@ -23,25 +26,33 @@ const Header = () => {
           </Link>
           <Link href="/psychologists" className={styles.navLink}>
             Psychologists
+            {pathname === "/psychologists" && ( // Условный рендеринг SVG под надписью Psychologists
+              <svg className={styles.navIcon} width="8" height="8">
+                <use href="/sprite.svg#icon-circle"></use>
+              </svg>
+            )}
           </Link>
-          {user && (
-            <Link href="/favorites" className={styles.navLink}>
-              Favorites
-            </Link>
-          )}
+          <Link href="/favorites" className={styles.navLink}>
+            Favorites
+            {pathname === "/favorites" && ( // Условный рендеринг SVG под надписью Favorites
+              <svg className={styles.navIcon} width="8" height="8">
+                <use href="/sprite.svg#icon-circle"></use>
+              </svg>
+            )}
+          </Link>
         </nav>
         <div className={styles.authButtons}>
           {!user && (
             <>
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className={styles.authButton2}
+                className={styles.authButton}
               >
                 Log In
               </button>
               <button
                 onClick={() => setIsRegisterModalOpen(true)}
-                className={styles.authButton}
+                className={styles.authButton2}
               >
                 Registration
               </button>
@@ -49,11 +60,14 @@ const Header = () => {
           )}
           {user && (
             <div className={styles.userSection}>
-              <span className={styles.userName}>
-                Welcome, {user.displayName || "User"}
-              </span>
+              <div className={styles.userAvatar}>
+                <svg className={styles.navIcon} width="24" height="24">
+                  <use href="/sprite.svg#icon-user"></use>
+                </svg>
+              </div>
+              <p className={styles.userName}>{user.displayName || "User"}</p>
               <button onClick={logout} className={styles.authButton}>
-                Log Out
+                Log out
               </button>
             </div>
           )}
