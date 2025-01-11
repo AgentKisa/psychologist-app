@@ -10,6 +10,7 @@ import {
   sortAndDisplayPsychologists,
   getSortedQuery,
 } from "../../utils/sortPsychologists";
+import styles from "./page.module.css";
 
 const PsychologistsPage = () => {
   let db;
@@ -51,8 +52,8 @@ const PsychologistsPage = () => {
   };
 
   useEffect(() => {
+    fetchAllPsychologists();
     if (user && !loading) {
-      fetchAllPsychologists();
       const storedFavorites = localStorage.getItem(`favorites_${user.uid}`);
       if (storedFavorites) {
         setFavorites(JSON.parse(storedFavorites));
@@ -64,7 +65,7 @@ const PsychologistsPage = () => {
     setLoadingPsychologists(true);
 
     try {
-      const psychologistsQuery = query(psychologistsRef, limitToFirst(100)); // Загружаем все данные
+      const psychologistsQuery = query(psychologistsRef, limitToFirst(100));
       const snapshot = await get(psychologistsQuery);
 
       if (snapshot.exists()) {
@@ -75,8 +76,8 @@ const PsychologistsPage = () => {
         }));
 
         const sortedData = sortAndDisplayPsychologists(dataArray, sortBy, 1);
-        setAllPsychologists(dataArray); // Сохраняем все данные
-        setDisplayedPsychologists(sortedData.displayed); // Отображаем первые 3 элемента
+        setAllPsychologists(dataArray);
+        setDisplayedPsychologists(sortedData.displayed);
         setHasMore(sortedData.hasMore);
       } else {
         setAllPsychologists([]);
@@ -103,7 +104,6 @@ const PsychologistsPage = () => {
     setHasMore(sortedData.hasMore);
   };
 
-  // Функция для управления добавлением/удалением из избранного
   const toggleFavorite = (psychologistId) => {
     const updatedFavorites = favorites.includes(psychologistId)
       ? favorites.filter((id) => id !== psychologistId)
@@ -153,9 +153,15 @@ const PsychologistsPage = () => {
             />
           ))}
           {hasMore && (
-            <button onClick={handleLoadMore} disabled={loadingPsychologists}>
-              {loadingPsychologists ? "Loading..." : "Load More"}
-            </button>
+            <div className={styles.buttonContainer}>
+              <button
+                className={styles.loadMoreButton}
+                onClick={handleLoadMore}
+                disabled={loadingPsychologists}
+              >
+                {loadingPsychologists ? "Loading..." : "Load More"}
+              </button>
+            </div>
           )}
         </div>
       )}

@@ -14,29 +14,20 @@ import { useRouter } from "next/navigation";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  let authInstance = null;
-  if (app) {
-    authInstance = getAuth(app);
-  }
+  const authInstance = getAuth(app);
 
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Получаем инстанс auth
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(authInstance, (user) => {
-      // Используем authInstance
       setUser(user);
       setLoading(false);
-
-      // Проверка авторизации на стороне клиента (для редиректа)
-      if (!user && router.pathname === "/psychologists") {
-        router.push("/");
-      }
     });
 
     return () => unsubscribe();
-  }, [authInstance, router]); // authInstance в зависимости
+  }, [authInstance]);
 
   const register = async (email, password) => {
     try {
@@ -44,7 +35,7 @@ export const AuthProvider = ({ children }) => {
         authInstance,
         email,
         password,
-      ); // Используем authInstance
+      );
       console.log("Успешная регистрация:", result);
       return result;
     } catch (error) {
@@ -54,19 +45,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = (email, password) => {
-    return signInWithEmailAndPassword(authInstance, email, password); // Используем authInstance
+    return signInWithEmailAndPassword(authInstance, email, password);
   };
 
   const logout = async () => {
     try {
-      await signOut(authInstance); // Используем authInstance
+      await signOut(authInstance);
       router.push("/");
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
 
-  const value = { user, loading, register, login, logout, auth: authInstance }; // Передаем authInstance в контекст
+  const value = { user, loading, register, login, logout, auth: authInstance };
   return (
     <AuthContext.Provider value={value}>
       {loading ? <div>Loading...</div> : children}

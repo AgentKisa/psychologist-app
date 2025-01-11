@@ -1,19 +1,43 @@
 "use client";
 
+import React, { useState } from "react";
 import ReactModal from "react-modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../utils/auth";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import styles from "./LoginModal.module.css";
+
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.50)",
+    zIndex: 10,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "8px",
+    border: "none",
+    padding: "0px",
+    maxWidth: "90vw",
+    zIndex: 11,
+  },
+};
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
+  password: yup.string().min(8).required(),
 });
 
 const LoginModal = ({ isOpen, onRequestClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   useEffect(() => {
     const appElement = document.getElementById("__next");
     if (appElement) {
@@ -55,57 +79,69 @@ const LoginModal = ({ isOpen, onRequestClose }) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Login Modal"
-      className="modal"
-      overlayClassName="modal-overlay"
-      closeTimeoutMS={200}
       appElement={document.body}
-      //   appElement={document.getElementById("body")}
-      style={{
-        overlay: {
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.75)", // Semi-transparent black background
-        },
-        content: {
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          // transform: "translate(-50%, -50%)",
-          width: "400px", // Adjust width as needed
-          border: "1px solid #ccc",
-          background: "#fff",
-          padding: "20px",
-          borderRadius: "4px",
-        },
-      }}
+      style={customStyles}
+      shouldCloseOnOverlayClick={true}
     >
-      <div className="modal-content">
-        <button onClick={onRequestClose}>X</button>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("email")} type="email" placeholder="Email" />{" "}
-          {/* <--- Использование register */}
-          {errors.email && (
-            <p className="error-message">{errors.email.message}</p>
-          )}
-          <input
-            {...register("password")}
-            type="password"
-            placeholder="Password"
-          />{" "}
-          {/* <--- Использование register */}
-          {errors.password && (
-            <p className="error-message">{errors.password.message}</p>
-          )}
-          <button type="submit">Login</button>
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onRequestClose}>
+          <svg width="32" height="32">
+            <use href="/sprite.svg#icon-x"></use>
+          </svg>
+        </button>
+        <h2 className={styles.modalTitle}>Log In</h2>
+        <p className={styles.modalDescription}>
+          Welcome back! Please enter your credentials to access your account and
+          continue your search for a psychologist.
+        </p>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.inputWrapper}>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+            />
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email.message}</p>
+            )}
+          </div>
+          <div className={styles.inputWrapper}>
+            <input
+              {...register("password")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className={styles.input}
+            />
+            <svg
+              width="20"
+              height="20"
+              onClick={togglePasswordVisibility}
+              className={styles.eyeIcon}
+            >
+              <use
+                href={
+                  showPassword
+                    ? "/sprite.svg#icon-eye"
+                    : "/sprite.svg#icon-eye-off"
+                }
+              ></use>
+            </svg>
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
+          <button type="submit" className={styles.submitButton}>
+            Log In
+          </button>
         </form>
       </div>
     </ReactModal>

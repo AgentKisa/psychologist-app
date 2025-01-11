@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./AppointmentModal.module.css";
 import TimePicker from "./TimePicker";
+import { toast } from "react-toastify";
 
 const customStyles = {
   overlay: {
@@ -64,6 +65,7 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
   const handleClose = () => {
     onClose();
     document.body.classList.remove("ReactModal__Body--open");
+    toast.success("Psychologist successfully booked!");
   };
 
   React.useEffect(() => {

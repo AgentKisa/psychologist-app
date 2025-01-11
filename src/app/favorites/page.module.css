@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    max-width: 1184px;
+    margin: 0 auto;
+
+}
+
+.noFavorites {
+    margin-top: 30px;
+    font-size: 18px;
+    color: #ecd20c;
+}

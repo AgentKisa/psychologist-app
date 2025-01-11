@@ -1,6 +1,6 @@
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database"; // Для Realtime Database
-import { initializeApp, getApps } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmQzAqtepITWuYL_nwU9sQpzI8O9-LkOM",
@@ -11,23 +11,11 @@ const firebaseConfig = {
   appId: "1:349595474293:web:cc18646f3e97e0812bdb3c",
 };
 
-let app;
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Проверяем, запущено ли приложение на клиенте
-if (typeof window !== "undefined") {
-  if (getApps().length === 0) {
-    app = initializeApp(firebaseConfig);
-  } else {
-    app = getApps()[0]; // Если уже инициализировано, используем существующее
-  }
-}
-
-const db =
-  typeof window !== "undefined"
-    ? getDatabase(
-        app,
-        "https://psychologist-app-e21ac-default-rtdb.europe-west1.firebasedatabase.app",
-      )
-    : null;
+const db = getDatabase(
+  app,
+  "https://psychologist-app-e21ac-default-rtdb.europe-west1.firebasedatabase.app",
+);
 
 export { app, db };

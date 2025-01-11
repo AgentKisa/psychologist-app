@@ -1,0 +1,113 @@
+.modalContent {
+    width: 566px;
+    min-height: 510px;
+    padding: 64px;
+    background-color: #FBFBFB;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    stroke: black;
+    width: 32px;
+    height: 32px;
+}
+
+.modalTitle {
+    color: #191A15;
+    font-family: Inter;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    text-align: left;
+    justify-content: left;
+    margin-bottom: 20px;
+}
+
+.modalDescription {
+    color: rgba(25, 26, 21, 0.50);
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inputWrapper {
+    position: relative;
+    margin-bottom: 18px;
+    /* Отступ между инпутами */
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    padding-right: 40px;
+    /* Добавляем отступ справа для иконки */
+    border: 1px solid rgba(25, 26, 21, 0.10);
+    border-radius: 12px;
+    background-color: transparent;
+    color: #191A15;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.input::placeholder {
+    color: #191A15;
+}
+
+.eyeIcon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    fill: none;
+    stroke: black;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+
+.submitButton {
+    padding: 16px;
+    border-radius: 30px;
+    background: #3470FF;
+    border: none;
+    cursor: pointer;
+    color: #FBFBFB;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+    margin-top: 22px;
+}
+
+.submitButton:hover {
+    background: #255EE8;
+}

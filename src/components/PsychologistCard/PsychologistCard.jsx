@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./PsychologistCard.module.css";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useAuth } from "@/utils/auth";
 
 const PsychologistCard = ({
   psychologist,
@@ -10,6 +12,14 @@ const PsychologistCard = ({
   toggleFavorite,
   onOpenModal,
 }) => {
+  const { user } = useAuth();
+  const handleToggleFavorite = () => {
+    if (!user) {
+      toast.warn("This functionality is available only to authorized users.");
+      return;
+    }
+    toggleFavorite(psychologist.id);
+  };
   return (
     <article className={styles.cardContainer}>
       <div className={styles.card}>
@@ -45,7 +55,7 @@ const PsychologistCard = ({
                 aria-label={
                   isFavorite ? "Remove from Favorites" : "Add to Favorites"
                 }
-                onClick={toggleFavorite}
+                onClick={handleToggleFavorite}
               >
                 <svg width="26" height="24">
                   <use

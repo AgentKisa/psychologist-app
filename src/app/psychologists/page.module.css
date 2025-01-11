@@ -1,0 +1,29 @@
+/* PsychologistsPage.module.css */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loadMoreButton {
+    display: inline-flex;
+    padding: 14px 48px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 30px;
+    background: #3470FF;
+    color: #FBFBFB;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.16px;
+    border: none;
+    cursor: pointer;
+}
+
+.loadMoreButton:disabled {
+    background: #a8a8a8;
+}

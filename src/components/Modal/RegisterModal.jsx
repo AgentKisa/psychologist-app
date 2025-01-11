@@ -4,21 +4,45 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../utils/auth";
-import { useEffect } from "react";
+import ReactModal from "react-modal";
 import { updateProfile } from "firebase/auth";
+import styles from "./RegisterModal.module.css";
+import { useState } from "react";
+
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.50)",
+    zIndex: 10,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "8px",
+    border: "none",
+    padding: "0px",
+    maxWidth: "90vw",
+    zIndex: 11,
+  },
+};
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
+  password: yup.string().min(8).required(),
   name: yup.string().required("Please enter your name"),
 });
 
-const RegisterModal = ({ onClose }) => {
-  const { register, loading, auth } = useAuth();
+const RegisterModal = ({ isOpen, onClose }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const { register: firebaseRegister, loading, auth } = useAuth(); // Изменяем имя, чтобы избежать конфликта
   const {
     register: registerForm,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -64,104 +88,86 @@ const RegisterModal = ({ onClose }) => {
     }
   };
 
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape); // Слушаем события на window
-
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <button className="close-button" onClick={onClose}>
-          X
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      appElement={document.body}
+      style={customStyles}
+      shouldCloseOnOverlayClick={true}
+    >
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onClose}>
+          <svg width="32" height="32">
+            <use href="/sprite.svg#icon-x"></use>
+          </svg>
         </button>
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...registerForm("email")} type="email" placeholder="Email" />
-          {errors.email && (
-            <p className="error-message">{errors.email.message}</p>
-          )}
+        <h2 className={styles.modalTitle}>Registration</h2>
+        <p className={styles.modalDescription}>
+          Thank you for your interest in our platform! In order to register, we
+          need some information. Please provide us with the following
+          information.
+        </p>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.inputWrapper}>
+            <input
+              className={styles.input}
+              {...registerForm("name")}
+              type="text"
+              placeholder="Name"
+            />
+            {errors.name && (
+              <p className={styles.errorMessage}>{errors.name.message}</p>
+            )}
+          </div>
+          <div className={styles.inputWrapper}>
+            <input
+              {...registerForm("email")}
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+            />
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email.message}</p>
+            )}
+          </div>
 
-          <input
-            {...registerForm("password")}
-            type="password"
-            placeholder="Password"
-          />
-          {errors.password && (
-            <p className="error-message">{errors.password.message}</p>
-          )}
+          <div className={styles.inputWrapper}>
+            <input
+              {...registerForm("password")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className={styles.input}
+            />
+            <svg
+              width="20"
+              height="20"
+              onClick={togglePasswordVisibility}
+              className={styles.eyeIcon}
+            >
+              <use
+                href={
+                  showPassword
+                    ? "/sprite.svg#icon-eye"
+                    : "/sprite.svg#icon-eye-off"
+                }
+              ></use>
+            </svg>
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
 
-          <input {...registerForm("name")} type="text" placeholder="Name" />
-          {errors.name && (
-            <p className="error-message">{errors.name.message}</p>
-          )}
-          <button type="submit">Register</button>
+          <button type="submit" className={styles.submitButton}>
+            Sign Up
+          </button>
         </form>
       </div>
-      <style jsx>{`
-        .modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000; /* Чтобы модалка была поверх всего */
-        }
-
-        .modal-content {
-          background-color: white;
-          padding: 20px;
-          border-radius: 8px;
-          max-width: 500px; /* Ограничиваем ширину */
-          width: 90%; /* Адаптивность */
-          position: relative;
-        }
-
-        .close-button {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          cursor: pointer;
-          border: none;
-          background: none;
-          font-size: 1.2em;
-        }
-
-        .error-message {
-          color: red;
-          font-size: 0.8em;
-          margin-top: 5px;
-        }
-
-        input {
-          width: calc(100% - 22px);
-          padding: 10px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-        button[type="submit"] {
-          background-color: #007bff;
-          color: white;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-      `}</style>
-    </div>
+    </ReactModal>
   );
 };
 

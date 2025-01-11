@@ -4,13 +4,13 @@ import { getDatabase, ref, get, query, limitToFirst } from "firebase/database";
 import { useAuth } from "../../utils/auth";
 import { app } from "../../utils/firebase";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard";
+import styles from "./page.module.css";
 
 const FavoritesPage = () => {
   const { user, loading } = useAuth();
   const [favorites, setFavorites] = useState([]);
   const [allPsychologists, setAllPsychologists] = useState([]);
 
-  // Fetch all psychologists from Firebase
   const fetchAllPsychologists = async () => {
     const db = getDatabase(
       app,
@@ -50,10 +50,9 @@ const FavoritesPage = () => {
   }
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <div className={styles.container}>
       {favoritePsychologists.length === 0 ? (
-        <p>No favorites added yet.</p>
+        <p className={styles.noFavorites}>No favorites added yet.</p>
       ) : (
         favoritePsychologists.map((psychologist, index) => (
           <PsychologistCard

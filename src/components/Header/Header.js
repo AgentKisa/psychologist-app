@@ -7,12 +7,20 @@ import RegisterModal from "../Modal/RegisterModal";
 import LoginModal from "../Modal/LoginModal";
 import { useAuth } from "../../utils/auth";
 import { usePathname } from "next/navigation"; // Импортируем usePathname
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { user, logout } = useAuth();
-  const pathname = usePathname(); // Используем usePathname
+  const pathname = usePathname();
+
+  const handleFavoritesClick = (e) => {
+    if (!user) {
+      e.preventDefault();
+      toast.warn("This functionality is available only to authorized users.");
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -26,15 +34,19 @@ const Header = () => {
           </Link>
           <Link href="/psychologists" className={styles.navLink}>
             Psychologists
-            {pathname === "/psychologists" && ( // Условный рендеринг SVG под надписью Psychologists
+            {pathname === "/psychologists" && (
               <svg className={styles.navIcon} width="8" height="8">
                 <use href="/sprite.svg#icon-circle"></use>
               </svg>
             )}
           </Link>
-          <Link href="/favorites" className={styles.navLink}>
+          <Link
+            href={user ? "/favorites" : "/"}
+            onClick={handleFavoritesClick}
+            className={styles.navLink}
+          >
             Favorites
-            {pathname === "/favorites" && ( // Условный рендеринг SVG под надписью Favorites
+            {pathname === "/favorites" && (
               <svg className={styles.navIcon} width="8" height="8">
                 <use href="/sprite.svg#icon-circle"></use>
               </svg>
