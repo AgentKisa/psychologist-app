@@ -1,3 +1,4 @@
+/* Основные стили для настольных компьютеров */
 .header {
     padding: 1rem 0;
     border-bottom: 1px solid #ddd;
@@ -7,88 +8,102 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    align-content: center;
     max-width: 1184px;
     margin: 0 auto;
-    padding: 0px;
+    padding: 0 1rem;
+    /* Увеличиваем отступы */
 }
 
 .logo {
     color: #3470FF;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 1.25rem;
+    /* 20px */
     font-weight: 700;
     line-height: 1.2;
-    letter-spacing: -0.4px;
+    letter-spacing: -0.02em;
 }
 
 .logoSpan {
     color: #191A15;
-    font-size: 20px;
+    font-size: 1.25rem;
+    /* 20px */
     font-weight: 600;
-    line-height: 24px;
-    letter-spacing: -0.4px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     font-family: Inter;
 }
 
 .nav {
     display: flex;
-    height: 20px;
+    height: 1.25rem;
+    /* 20px */
 }
 
 .navLink {
-    margin-left: 20px;
+    margin-left: 1.25rem;
+    /* 20px */
     color: #191A15;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
     font-weight: 400;
     line-height: 1.2;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.01em;
     position: relative;
 }
 
 .navIcon {
     display: block;
-    margin: 4px auto 0;
+    margin: 0.25rem auto 0;
+    /* 4px */
     /* Центрируем иконку под текстом */
 }
 
 .authButtons {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
+    /* 10px */
 }
 
 .authButton {
-    padding: 14px 39px;
+    padding: 0.875rem 2.5rem;
+    /* 14px 39px */
     border: 1px solid rgba(25, 26, 21, 0.20);
-    border-radius: 30px;
+    border-radius: 1.875rem;
+    /* 30px */
     background-color: transparent;
     cursor: pointer;
     transition: background-color 0.3s ease;
     color: #191A15;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.01em;
 }
 
 .authButton2 {
-    margin-left: 10px;
-    padding: 14px 39px;
+    margin-left: 0.625rem;
+    /* 10px */
+    padding: 0.875rem 2.5rem;
+    /* 14px 39px */
     border: none;
-    border-radius: 30px;
+    border-radius: 1.875rem;
+    /* 30px */
     cursor: pointer;
     transition: background-color 0.3s ease;
     color: white;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.01em;
     background: #3470FF;
 }
 
@@ -100,26 +115,120 @@
 .userSection {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
+    /* 10px */
 }
 
 .userAvatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    /* 40px */
+    height: 2.5rem;
+    /* 40px */
     background-color: #3470FF;
-    border-radius: 10px;
+    border-radius: 0.625rem;
+    /* 10px */
     color: white;
 }
 
 .userName {
     color: #191A15;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 1rem;
+    /* 16px */
     font-weight: 500;
     line-height: 1.2;
-    letter-spacing: -0.16px;
-    margin-right: 14px;
+    letter-spacing: -0.01em;
+    margin-right: 0.875rem;
+
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    .navLink {
+        margin: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .authButtons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .authButton,
+    .authButton2 {
+        width: 80%;
+        margin-top: 0.5rem;
+    }
+
+    .userSection {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .userName {
+        margin-right: 0;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .logo,
+    .logoSpan {
+        font-size: 1.125rem;
+
+    }
+
+    .nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .navLink {
+        margin: 0.5rem 0;
+        font-size: 0.875rem;
+    }
+
+    .authButtons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .authButton,
+    .authButton2 {
+        width: 90%;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .userSection {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .userName {
+        font-size: 0.875rem;
+    }
 }

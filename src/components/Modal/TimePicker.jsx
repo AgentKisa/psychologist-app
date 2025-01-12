@@ -36,7 +36,7 @@ const TimePicker = ({ value, onChange }) => {
       (t) => t.hour === time.hour && t.minute === time.minute,
     );
     if (index !== -1) {
-      return index * 30; // 30px - высота элемента времени
+      return index * 30;
     }
     return 0;
   };
@@ -60,21 +60,26 @@ const TimePicker = ({ value, onChange }) => {
   const formatTime = (time) => {
     const formattedHour = String(time.hour).padStart(2, "0");
     const formattedMinute = String(time.minute).padStart(2, "0");
-    return `${formattedHour}:${formattedMinute}`;
+    return (
+      <>
+        <span className={styles.timePart}>{formattedHour}</span>
+        <span className={styles.timeSeparator}>:</span>
+        <span className={styles.timePart}>{formattedMinute}</span>
+      </>
+    );
   };
 
   return (
     <div className={styles.timePickerContainer} ref={timePickerRef}>
-      <input
-        type="text"
-        value={formatTime(selectedTime)}
-        readOnly
-        onClick={() => setIsOpen(!isOpen)}
-        className={styles.timeInput}
-      />
+      <div className={styles.timeInput} onClick={() => setIsOpen(!isOpen)}>
+        {formatTime(selectedTime)}
+        <svg width="20" height="20" className={styles.icon}>
+          <use href="/sprite.svg#icon-clock"></use>
+        </svg>
+      </div>
       {isOpen && (
         <div className={styles.dropdown} ref={dropdownRef}>
-          <div className={styles.dropdownHeader}>Meeting Time</div>
+          <div className={styles.dropdownHeader}>Meeting time</div>
           <div className={styles.dropdownContent}>
             {generateTimeOptions().map((time) => (
               <div

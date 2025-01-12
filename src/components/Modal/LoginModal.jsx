@@ -26,6 +26,7 @@ const customStyles = {
     padding: "0px",
     maxWidth: "90vw",
     zIndex: 11,
+    background: "none",
   },
 };
 

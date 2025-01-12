@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import RegisterModal from "../Modal/RegisterModal";
 import LoginModal from "../Modal/LoginModal";
 import { useAuth } from "../../utils/auth";
-import { usePathname } from "next/navigation"; // Импортируем usePathname
+import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";
 
 const Header = () => {

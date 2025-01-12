@@ -53,5 +53,9 @@
 <symbol id="icon-circle" viewBox="0 0 36 32">
 <path fill="#3470ff" style="fill: var(--color2, #3470ff)" d="M34 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
 </symbol>
+<symbol id="icon-clock" viewBox="0 0 32 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4" d="M16 29.333c7.364 0 13.333-5.969 13.333-13.333s-5.97-13.333-13.333-13.333c-7.364 0-13.333 5.97-13.333 13.333s5.97 13.333 13.333 13.333z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4" d="M16 8v8l5.333 2.667"></path>
+</symbol>
     </defs>
 </svg>

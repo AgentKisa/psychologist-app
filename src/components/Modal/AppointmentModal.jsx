@@ -24,6 +24,7 @@ const customStyles = {
     padding: "0px",
     maxWidth: "90vw",
     zIndex: 11,
+    background: "none",
   },
 };
 
@@ -59,13 +60,13 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    handleClose();
+    onClose();
+    toast.success("Psychologist successfully booked!");
   };
 
   const handleClose = () => {
     onClose();
     document.body.classList.remove("ReactModal__Body--open");
-    toast.success("Psychologist successfully booked!");
   };
 
   React.useEffect(() => {
@@ -102,7 +103,7 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            className={styles.inputPfone}
+            className={styles.input}
             type="text"
             placeholder="Name"
             {...register("name")}

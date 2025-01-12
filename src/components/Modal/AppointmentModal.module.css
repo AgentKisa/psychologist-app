@@ -6,10 +6,9 @@
     max-height: 100vh;
     overflow-y: auto;
     position: relative;
-
+    display: flex;
+    flex-direction: column;
 }
-
-
 
 .modalContent h2 {
     color: #191A15;
@@ -35,7 +34,6 @@
 .psychologistInfo {
     display: flex;
     align-items: flex-start;
-    /* Выравнивание по верхнему краю */
     margin-bottom: 40px;
 }
 
@@ -45,14 +43,11 @@
     border-radius: 15px;
     margin-right: 15px;
     object-fit: cover;
-    /* Важно для корректного отображения обрезанных аватаров */
 }
 
 .psychologistInfoContent {
-    /* Новый контейнер для текста */
     display: flex;
     flex-direction: column;
-    /* Расположение элементов друг под другом */
 }
 
 .psychologistName {
@@ -96,8 +91,6 @@
     background-color: transparent;
     stroke: black;
 }
-
-
 
 .input {
     width: 100%;
@@ -147,23 +140,8 @@
     line-height: 1.2;
 }
 
-
-
-@media only screen and (max-width: 600px) {
-    .modalContent {
-        width: 90%;
-        padding: 20px;
-    }
-
-    .psychologistInfo img {
-        width: 80px;
-        height: 80px;
-    }
-}
-
 .submitButton {
     background-color: #007bff;
-
     padding: 16px 20px;
     border: none;
     border-radius: 30px;
@@ -183,34 +161,68 @@
     background-color: #0056b3;
 }
 
-
 .closeBtn:hover {
     background-color: #f0f0f0;
 }
 
 .timePhoneContainer {
     display: flex;
-    justify-content: space-between;
-    /* width: 100%; */
+    justify-content: center;
     gap: 8px;
-    /* margin-top: 16px; */
-}
-
-.timePhoneContainer input {
-    /* margin-right: 10px; */
-    /* Отступ между компонентами */
-}
-
-.custom-text-field .MuiOutlinedInput-root {
-    padding: 5px !important;
-    /* Изменение padding */
 
 }
+
+
 
 .validationContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: auto;
-    /* Inherit width from parent */
+}
+
+@media (max-width: 768px) {
+    .modalContent {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .psychologistInfo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .psychologistInfo img {
+        width: 80px;
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .modalContent {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .psychologistInfo {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .psychologistInfo img {
+        width: 60px;
+        height: 60px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        text-align: center;
+    }
 }

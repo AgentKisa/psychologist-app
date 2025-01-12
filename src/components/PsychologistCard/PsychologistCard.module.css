@@ -1,20 +1,21 @@
+.cardContainer {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     background-color: #FFFFFF;
     border-radius: 24px;
     box-sizing: border-box;
     padding: 24px;
-    width: 1184px;
     cursor: pointer;
     border: none;
     display: flex;
     margin: 0 auto;
+    max-width: 100%;
+    width: auto;
 }
-
-
-.cardContainer {
-    margin-bottom: 32px;
-}
-
 
 .cardImg {
     position: relative;
@@ -38,7 +39,7 @@
 .cardImg svg {
     position: absolute;
     top: 23px;
-    right: 12px;
+    right: 23px;
     width: 14px;
     height: 14px;
     fill: #38C22B;
@@ -47,6 +48,7 @@
 .head {
     display: flex;
     flex-direction: column;
+    width: calc(100% - 144px);
 }
 
 .title {
@@ -62,6 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .name {
@@ -79,6 +82,7 @@
     width: 900px;
     margin-bottom: 16px;
     gap: 4px;
+    max-width: 100%;
 }
 
 .experience,
@@ -148,7 +152,6 @@
     fill: transparent;
 }
 
-
 .heartButton.filledHeart {
     fill: #3470FF;
     stroke: none;
@@ -167,9 +170,6 @@
     gap: 8px;
     align-items: center;
 }
-
-
-
 
 .toggleButton {
     color: #191A15;
@@ -213,6 +213,7 @@
     flex-wrap: wrap;
     width: 760px;
     margin-bottom: 25px;
+    max-width: 100%;
 }
 
 .review:last-child {
@@ -286,12 +287,13 @@
     opacity: 0.7;
     margin: 0;
     margin-top: 8px;
+
 }
 
 .appointment {
     display: flex;
-    justify-content: left;
-    align-items: right;
+    justify-content: flex-start;
+    align-items: center;
     text-align: right;
 }
 
@@ -306,13 +308,73 @@
     border: none;
     border-radius: 30px;
     background: #3470FF;
-    padding: 10px 20px;
+    padding: 14px 32px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    padding: 14px 32px;
-
 }
 
 .appointmentButton:hover {
     background: #255EE8;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        width: 90%;
+
+    }
+
+    .cardImg {
+        margin-bottom: 16px;
+    }
+
+    .info {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 8px;
+    }
+
+    .description {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .priceRating {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .appointment {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 12px;
+        width: 95%;
+
+    }
+
+    .info {
+        justify-content: center;
+        margin-bottom: 8px;
+    }
+
+    .description {
+        font-size: 0.875rem;
+    }
+
+    .priceRating {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .appointment {
+        justify-content: center;
+    }
 }

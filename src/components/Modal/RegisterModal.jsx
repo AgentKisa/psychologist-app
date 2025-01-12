@@ -26,6 +26,7 @@ const customStyles = {
     padding: "0px",
     maxWidth: "90vw",
     zIndex: 11,
+    background: "none",
   },
 };
 
@@ -37,7 +38,7 @@ const schema = yup.object().shape({
 
 const RegisterModal = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { register: firebaseRegister, loading, auth } = useAuth(); // Изменяем имя, чтобы избежать конфликта
+  const { register: firebaseRegister, loading, auth } = useAuth();
   const {
     register: registerForm,
     handleSubmit,

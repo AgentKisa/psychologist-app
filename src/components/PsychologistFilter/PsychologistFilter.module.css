@@ -1,14 +1,12 @@
 .filterDiv {
-    padding: 16px 0px;
+    padding: 0px 0px 32px 0px;
     display: flex;
     gap: 8px;
     flex-direction: column;
     box-sizing: border-box;
-    margin: 0px auto;
+    margin: 0 auto;
     width: 100%;
-    /* Обеспечиваем полную ширину контейнера */
     max-width: 1184px;
-    /* Выравниваем с максимальной шириной остальных блоков */
 }
 
 .filter {
@@ -25,9 +23,7 @@
     background: #3470FF;
     border: none;
     width: 100%;
-    /* Обеспечиваем полную ширину контейнера */
     max-width: 226px;
-    /* Устанавливаем максимальную ширину */
     position: relative;
     cursor: pointer;
 }
@@ -95,4 +91,67 @@
 
 .option:hover {
     color: #191A15;
+}
+
+@media (max-width: 768px) {
+    .filterDiv {
+        padding: 0px 0px 12px 0px;
+        gap: 6px;
+        margin: 0 auto;
+    }
+
+    .filter {
+        align-items: center;
+        width: 60%;
+    }
+
+    .filterContainer {
+        width: 100%;
+        max-width: 100%;
+        height: 42px;
+    }
+
+    .filterTitle {
+        font-size: 12px;
+        margin-bottom: 6px;
+        text-align: center;
+    }
+
+    .selectedOption {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .filterDiv {
+        padding: 0px 0px 10px 0px;
+        gap: 4px;
+        margin: 0 auto;
+    }
+
+    .filter {
+        align-items: center;
+        width: 60%;
+    }
+
+    .filterContainer {
+        width: 100%;
+        max-width: 100%;
+        height: 38px;
+    }
+
+    .filterTitle {
+        font-size: 10px;
+        margin-bottom: 4px;
+        text-align: center;
+    }
+
+    .selectedOption {
+        font-size: 12px;
+    }
+
+    .arrowIcon {
+        width: 12px;
+        height: 12px;
+    }
 }

@@ -1,8 +1,15 @@
-/* PsychologistsPage.module.css */
+.container {
+    max-width: 1184px;
+    margin: 0 auto;
+    padding-top: 64px;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 100px;
+    padding-top: 64px;
 }
 
 .loadMoreButton {

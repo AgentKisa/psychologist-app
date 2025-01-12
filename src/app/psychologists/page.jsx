@@ -134,7 +134,7 @@ const PsychologistsPage = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <PsychologistFilter sortBy={sortBy} onSort={onSort} />
 
       {loadingPsychologists && displayedPsychologists.length === 0 ? (

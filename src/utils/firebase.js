@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAmQzAqtepITWuYL_nwU9sQpzI8O9-LkOM",
-  authDomain: "psychologist-app-e21ac.firebaseapp.com",
-  projectId: "psychologist-app-e21ac",
-  storageBucket: "psychologist-app-e21ac.firebasestorage.app",
-  messagingSenderId: "349595474293",
-  appId: "1:349595474293:web:cc18646f3e97e0812bdb3c",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();

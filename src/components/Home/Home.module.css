@@ -8,7 +8,8 @@
 .container {
     display: flex;
     max-width: 1440px;
-    margin: 0px auto;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .textBlock {
@@ -18,43 +19,46 @@
 
 .title {
     color: #191A15;
-    font-size: 80px;
+    font-size: 5rem;
     font-weight: 600;
     line-height: 1;
-    letter-spacing: -1.6px;
+    letter-spacing: -0.02em;
     margin-bottom: 20px;
     margin-top: 48px;
 }
 
 .highlight {
     color: #3470FF;
-    font-size: 80px;
+    font-size: 5rem;
     font-style: italic;
     font-weight: 600;
-    line-height: 82px;
-    letter-spacing: -1.6px;
+    line-height: 1.025;
+
+    letter-spacing: -0.02em;
 }
 
 .description {
     color: #191A15;
     font-family: Inter;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
     line-height: 1.3;
-    letter-spacing: -0.36px;
+    letter-spacing: -0.02em;
     margin-bottom: 40px;
     max-width: 510px;
 }
 
 .ctaButton {
+    display: inline-flex;
+    align-items: center;
     padding: 18px 50px;
     color: #FBFBFB;
     background: #3470FF;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.02em;
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -66,7 +70,6 @@
 
 .imageBlock {
     position: relative;
-    /* Добавляем позиционирование */
     flex-shrink: 0;
 }
 
@@ -110,7 +113,8 @@
     margin: 0;
     color: rgba(251, 251, 251, 0.50);
     font-family: Inter;
-    font-size: 14px;
+    font-size: 0.875rem;
+
     font-weight: 400;
     line-height: normal;
     margin-bottom: 8px;
@@ -119,7 +123,7 @@
 .statsValue {
     color: #FBFBFB;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: normal;
     margin: 0;
@@ -176,4 +180,155 @@
     height: 20px;
     fill: white;
     transform: rotate(-15deg);
+}
+
+@media (max-width: 768px) {
+    .home {
+        flex-direction: column;
+        height: auto;
+        margin-top: 40px;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .textBlock {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 3rem;
+
+        margin-top: 24px;
+    }
+
+    .highlight {
+        font-size: 3rem;
+
+        line-height: 1.1;
+
+    }
+
+    .description {
+        font-size: 1rem;
+        letter-spacing: -0.01em;
+        max-width: 100%;
+    }
+
+    .ctaButton {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        letter-spacing: -0.01em;
+        justify-content: center;
+    }
+
+    .imageBlock {
+        position: relative;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .statsBox {
+        position: absolute;
+        top: 65%;
+        left: 0%;
+        width: 280px;
+    }
+
+    .questionBox {
+        position: absolute;
+        top: 40%;
+        left: 0%;
+        width: 44px;
+        height: 44px;
+    }
+
+    .usersBox {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
+        flex-direction: column;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    .textBlock {
+        margin-right: 0;
+        margin-bottom: 1rem;
+
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 2.5rem;
+
+        margin-top: 16px;
+    }
+
+    .highlight {
+        font-size: 2.5rem;
+
+        line-height: 1.1;
+    }
+
+    .description {
+        font-size: 0.875rem;
+        letter-spacing: -0.01em;
+        max-width: 100%;
+    }
+
+    .ctaButton {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        letter-spacing: -0.01em;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .imageBlock {
+        position: relative;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .statsBox {
+        position: absolute;
+
+        width: 260px;
+    }
+
+    .questionBox {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+    }
+
+    .usersBox {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+    }
 }

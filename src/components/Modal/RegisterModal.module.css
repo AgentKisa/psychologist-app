@@ -53,14 +53,12 @@
 .inputWrapper {
     position: relative;
     margin-bottom: 18px;
-    /* Отступ между инпутами */
 }
 
 .input {
     width: 100%;
     padding: 16px;
     padding-right: 40px;
-    /* Добавляем отступ справа для иконки */
     border: 1px solid rgba(25, 26, 21, 0.10);
     border-radius: 12px;
     background-color: transparent;
@@ -110,4 +108,66 @@
 
 .submitButton:hover {
     background: #255EE8;
+}
+
+@media (max-width: 768px) {
+    .modalContent {
+        width: 90%;
+        padding: 32px;
+    }
+
+    .modalTitle {
+        font-size: 32px;
+    }
+
+    .modalDescription {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .submitButton {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .closeButton {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modalContent {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .modalTitle {
+        font-size: 28px;
+    }
+
+    .modalDescription {
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+
+    .input {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .submitButton {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .closeButton {
+        width: 24px;
+        height: 24px;
+    }
 }

@@ -110,8 +110,6 @@ const PsychologistCard = ({
                     </div>
                     <div className={styles.reviewContent}>
                       <div className={styles.reviewerInfo}>
-                        {" "}
-                        {/* Контейнер для имени и рейтинга */}
                         <div className={styles.reviewerNameRating}>
                           <p className={styles.reviewerName}>
                             {review.reviewer}

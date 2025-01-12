@@ -1,4 +1,3 @@
-// src/components/Home/Home.js
 import Image from "next/image";
 import styles from "./Home.module.css";
 import Link from "next/link";
