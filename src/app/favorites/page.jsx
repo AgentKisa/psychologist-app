@@ -79,11 +79,6 @@ const FavoritesPage = () => {
     setPage(1);
   };
 
-  if (!user) {
-    alert("You must be logged in to manage favorites.");
-    return null;
-  }
-
   const handleExpand = (id) => {
     setExpandedPsychologistId((prevId) => (prevId === id ? null : id));
   };
