@@ -8,6 +8,7 @@ import AppointmentModal from "../../components/Modal/AppointmentModal";
 import PsychologistFilter from "@/components/PsychologistFilter/PsychologistFilter";
 import { sortAndDisplayPsychologists } from "../../utils/sortPsychologists";
 import styles from "./page.module.css";
+import Loader from "../../components/Loader/Loader";
 
 const FavoritesPage = () => {
   const { user, loading } = useAuth();
@@ -20,8 +21,10 @@ const FavoritesPage = () => {
   const [sortBy, setSortBy] = useState("alphabet");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchAllPsychologists = async () => {
+    setIsLoading(true);
     const db = getDatabase(
       app,
       "https://psychologist-app-e21ac-default-rtdb.europe-west1.firebasedatabase.app",
@@ -38,6 +41,7 @@ const FavoritesPage = () => {
       }));
       setAllPsychologists(dataArray);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -126,41 +130,47 @@ const FavoritesPage = () => {
 
   return (
     <div className={styles.container}>
-      <PsychologistFilter sortBy={sortBy} onSort={onSort} />
-      {displayedPsychologists.length === 0 ? (
-        <p className={styles.noFavorites}>No favorites added yet.</p>
+      {isLoading ? (
+        <Loader />
       ) : (
-        <div>
-          {displayedPsychologists.map((psychologist, index) => (
-            <PsychologistCard
-              key={`${psychologist.id}-${index}`}
-              psychologist={psychologist}
-              isFavorite={true}
-              toggleFavorite={toggleFavorite}
-              isExpanded={expandedPsychologistId === psychologist.id}
-              onExpand={() => handleExpand(psychologist.id)}
-              onOpenModal={() => handleOpenModal(psychologist)}
-            />
-          ))}
-          {hasMore && (
-            <div className={styles.buttonContainer}>
-              <button
-                className={styles.loadMoreButton}
-                onClick={handleLoadMore}
-                disabled={!hasMore}
-              >
-                Load More
-              </button>
+        <>
+          <PsychologistFilter sortBy={sortBy} onSort={onSort} />
+          {displayedPsychologists.length === 0 ? (
+            <p className={styles.noFavorites}>No favorites added yet.</p>
+          ) : (
+            <div>
+              {displayedPsychologists.map((psychologist, index) => (
+                <PsychologistCard
+                  key={`${psychologist.id}-${index}`}
+                  psychologist={psychologist}
+                  isFavorite={true}
+                  toggleFavorite={toggleFavorite}
+                  isExpanded={expandedPsychologistId === psychologist.id}
+                  onExpand={() => handleExpand(psychologist.id)}
+                  onOpenModal={() => handleOpenModal(psychologist)}
+                />
+              ))}
+              {hasMore && (
+                <div className={styles.buttonContainer}>
+                  <button
+                    className={styles.loadMoreButton}
+                    onClick={handleLoadMore}
+                    disabled={!hasMore}
+                  >
+                    Load More
+                  </button>
+                </div>
+              )}
             </div>
           )}
-        </div>
-      )}
-      {isModalOpen && selectedPsychologist && (
-        <AppointmentModal
-          psychologist={selectedPsychologist}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-        />
+          {isModalOpen && selectedPsychologist && (
+            <AppointmentModal
+              psychologist={selectedPsychologist}
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+            />
+          )}
+        </>
       )}
     </div>
   );

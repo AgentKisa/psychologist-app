@@ -11,6 +11,7 @@ import {
   getSortedQuery,
 } from "../../utils/sortPsychologists";
 import styles from "./page.module.css";
+import Loader from "@/components/Loader/Loader";
 
 const PsychologistsPage = () => {
   let db;
@@ -130,7 +131,7 @@ const PsychologistsPage = () => {
   };
 
   if (loading) {
-    return <div>Loading user...</div>;
+    return <Loader />;
   }
 
   return (
@@ -138,7 +139,7 @@ const PsychologistsPage = () => {
       <PsychologistFilter sortBy={sortBy} onSort={onSort} />
 
       {loadingPsychologists && displayedPsychologists.length === 0 ? (
-        <div>Loading psychologists...</div>
+        <Loader />
       ) : (
         <div>
           {displayedPsychologists.map((psychologist, index) => (

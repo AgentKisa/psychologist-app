@@ -12,9 +12,9 @@ export const sortPsychologists = (dataArray, sortBy) => {
   } else if (sortBy === "priceDesc") {
     dataArray.sort((a, b) => b.price_per_hour - a.price_per_hour);
   } else if (sortBy === "popularity") {
-    dataArray.sort((a, b) => a.rating - b.rating);
-  } else if (sortBy === "popularityDesc") {
     dataArray.sort((a, b) => b.rating - a.rating);
+  } else if (sortBy === "popularityDesc") {
+    dataArray.sort((a, b) => a.rating - b.rating);
   }
 };
 

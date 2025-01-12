@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { app } from "./firebase";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
 const AuthContext = createContext(null);
 
@@ -36,7 +37,6 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       );
-      console.log("Успешная регистрация:", result);
       return result;
     } catch (error) {
       console.error("Ошибка в register:", error);
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
   const value = { user, loading, register, login, logout, auth: authInstance };
   return (
     <AuthContext.Provider value={value}>
-      {loading ? <div>Loading...</div> : children}
+      {loading ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };
