@@ -4,26 +4,26 @@ import Header from "../components/Header/Header";
 import { AuthProvider } from "@/utils/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Head from "next/head";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Psychologist App",
-  description:
-    "This project is an application for searching and booking consultations with psychologists.",
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.png",
-  },
-};
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head></head>
+      <Head>
+        {/* Указание пути к фавикону */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        <title>Psychologist App</title>
+        <meta
+          name="description"
+          content="This project is an application for searching and booking consultations with psychologists."
+        />
+      </Head>
       <body className={`${inter.className}`}>
         <AuthProvider>
           <Header />
