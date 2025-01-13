@@ -5,6 +5,7 @@ body {
   color: #333;
   /* max-width: 1440px; */
   box-sizing: border-box;
+  overflow-x: hidden;
 
 }
 
@@ -32,6 +33,12 @@ h3 {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+img,
+.image {
+  max-width: 100%;
+  height: auto;
 }
 
 a {

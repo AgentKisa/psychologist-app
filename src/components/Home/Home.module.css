@@ -2,6 +2,7 @@
     display: flex;
     background-color: #fbfbfb;
     margin-top: 78px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -9,6 +10,9 @@
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 1rem;
+    position: relative;
+
+
 }
 
 .textBlock {
@@ -70,6 +74,7 @@
 .imageBlock {
     position: relative;
     flex-shrink: 0;
+    padding: 20px;
 }
 
 .image {
