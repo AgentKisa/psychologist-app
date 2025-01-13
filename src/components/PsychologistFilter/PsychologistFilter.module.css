@@ -20,12 +20,17 @@
     align-items: center;
     height: 48px;
     border-radius: 14px;
-    background: #3470FF;
+    background-color: #3470FF;
     border: none;
     width: 100%;
     max-width: 226px;
     position: relative;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.filterContainer:hover {
+    background-color: #255EE8;
 }
 
 .filterTitle {

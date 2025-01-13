@@ -93,7 +93,7 @@
 .submitButton {
     padding: 16px;
     border-radius: 30px;
-    background: #3470FF;
+    background-color: #3470FF;
     border: none;
     cursor: pointer;
     color: #FBFBFB;
@@ -104,10 +104,11 @@
     line-height: 1.2;
     letter-spacing: -0.16px;
     margin-top: 22px;
+    transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
-    background: #255EE8;
+    background-color: #255EE8;
 }
 
 @media (max-width: 768px) {

@@ -40,18 +40,20 @@ const Header = () => {
               </svg>
             )}
           </Link>
-          <Link
-            href={user ? "/favorites" : "/"}
-            onClick={handleFavoritesClick}
-            className={styles.navLink}
-          >
-            Favorites
-            {pathname === "/favorites" && (
-              <svg className={styles.navIcon} width="8" height="8">
-                <use href="/sprite.svg#icon-circle"></use>
-              </svg>
-            )}
-          </Link>
+          {user && (
+            <Link
+              href="/favorites"
+              onClick={handleFavoritesClick}
+              className={styles.navLink}
+            >
+              Favorites
+              {pathname === "/favorites" && (
+                <svg className={styles.navIcon} width="8" height="8">
+                  <use href="/sprite.svg#icon-circle"></use>
+                </svg>
+              )}
+            </Link>
+          )}
         </nav>
         <div className={styles.authButtons}>
           {!user && (

@@ -105,13 +105,18 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
           </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="Name"
-            {...register("name")}
-          />
-          {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+          <div className={styles.validationContainer}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Name"
+              {...register("name")}
+            />
+            {errors.name && (
+              <p className={styles.error}>{errors.name.message}</p>
+            )}
+          </div>
+
           <div className={styles.timePhoneContainer}>
             <div className={styles.validationContainer}>
               <input
@@ -129,41 +134,44 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
               name="time"
               control={control}
               render={({ field: { onChange, value } }) => (
-                <div className={styles.timePhoneContainer}>
-                  <div className={styles.validationContainer}>
-                    <TimePicker value={value} onChange={onChange} />
-                    {errors.time && (
-                      <p className={styles.error}>{errors.time.message}</p>
-                    )}
-                  </div>
+                <div className={styles.validationContainer}>
+                  <TimePicker value={value} onChange={onChange} />
+                  {errors.time && (
+                    <p className={styles.error}>{errors.time.message}</p>
+                  )}
                 </div>
               )}
             />
           </div>
 
-          <input
-            className={styles.input}
-            type="email"
-            placeholder="Email"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className={styles.error}>{errors.email.message}</p>
-          )}
+          <div className={styles.validationContainer}>
+            <input
+              className={styles.input}
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className={styles.error}>{errors.email.message}</p>
+            )}
+          </div>
 
-          <textarea
-            className={styles.textarea}
-            placeholder="Comment"
-            {...register("comment")}
-          />
-          {errors.comment && (
-            <p className={styles.error}>{errors.comment.message}</p>
-          )}
+          <div className={styles.validationContainer}>
+            <textarea
+              className={styles.textarea}
+              placeholder="Comment"
+              {...register("comment")}
+            />
+            {errors.comment && (
+              <p className={styles.error}>{errors.comment.message}</p>
+            )}
+          </div>
 
           <button className={styles.submitButton} type="submit">
             Send
           </button>
         </form>
+
         <button className={styles.closeBtn} onClick={handleClose}>
           <svg width="32" height="32">
             <use href="/sprite.svg#icon-x"></use>

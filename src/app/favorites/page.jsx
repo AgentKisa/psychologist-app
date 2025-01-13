@@ -9,9 +9,11 @@ import PsychologistFilter from "@/components/PsychologistFilter/PsychologistFilt
 import { sortAndDisplayPsychologists } from "../../utils/sortPsychologists";
 import styles from "./page.module.css";
 import Loader from "../../components/Loader/Loader";
+import { useRouter } from "next/navigation";
 
 const FavoritesPage = () => {
   const { user, loading } = useAuth();
+  const router = useRouter();
   const [favorites, setFavorites] = useState([]);
   const [allPsychologists, setAllPsychologists] = useState([]);
   const [displayedPsychologists, setDisplayedPsychologists] = useState([]);
@@ -22,6 +24,12 @@ const FavoritesPage = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/");
+    }
+  }, [loading, user, router]);
 
   const fetchAllPsychologists = async () => {
     setIsLoading(true);

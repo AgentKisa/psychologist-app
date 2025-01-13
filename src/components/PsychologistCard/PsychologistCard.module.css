@@ -7,9 +7,7 @@
 .card {
     background-color: #FFFFFF;
     border-radius: 24px;
-    box-sizing: border-box;
     padding: 24px;
-    cursor: pointer;
     border: none;
     display: flex;
     margin: 0 auto;
@@ -188,6 +186,7 @@
     margin-bottom: 24px;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .details {
@@ -211,7 +210,7 @@
 .review {
     display: flex;
     flex-wrap: wrap;
-    width: 760px;
+    width: 640px;
     margin-bottom: 25px;
     max-width: 100%;
 }

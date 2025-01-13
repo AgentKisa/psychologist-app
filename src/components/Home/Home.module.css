@@ -56,7 +56,7 @@
     align-items: center;
     padding: 18px 50px;
     color: #FBFBFB;
-    background: #3470FF;
+    background-color: #3470FF;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 500;
@@ -65,10 +65,11 @@
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .ctaButton:hover {
-    background-color: #3271d9;
+    background-color: #255EE8;
 }
 
 .imageBlock {

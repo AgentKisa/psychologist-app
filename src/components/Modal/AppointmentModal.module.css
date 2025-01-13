@@ -77,9 +77,10 @@
 .error {
     color: red;
     font-size: 14px;
-    margin-bottom: 5px;
-    align-self: flex-end;
-    margin-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    overflow-wrap: break-word;
 }
 
 .closeBtn {
@@ -169,16 +170,22 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-
+    align-items: end;
 }
 
 
 
 .validationContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: auto;
+    position: relative;
+    margin-top: 16px;
+    /* Отступ сверху для инпута */
+}
+
+.input,
+.textarea {
+    position: relative;
+    z-index: 1;
+    /* Убедимся, что инпуты находятся выше текста ошибок */
 }
 
 @media (max-width: 768px) {
