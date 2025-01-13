@@ -65,11 +65,8 @@ const RegisterModal = ({ isOpen, onClose }) => {
         throw new Error("Registration failed.");
       }
 
-      console.log("User registered:", userCredential);
-
       if (auth && auth.currentUser) {
         await updateProfile(auth.currentUser, { displayName: data.name });
-        console.log("Profile updated successfully!");
         onClose();
         reset();
       } else {

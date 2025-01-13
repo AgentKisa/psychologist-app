@@ -61,7 +61,6 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
     onClose();
     toast.success("Psychologist successfully booked!");
   };

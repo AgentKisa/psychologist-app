@@ -60,7 +60,6 @@ const LoginModal = ({ isOpen, onRequestClose }) => {
     setIsSubmitting(true);
     try {
       await login(data.email, data.password);
-      console.log("Login successful!");
       onRequestClose();
     } catch (error) {
       console.error("Error during login:", error);

@@ -109,8 +109,6 @@ const PsychologistsPage = () => {
     const updatedFavorites = favorites.includes(psychologistId)
       ? favorites.filter((id) => id !== psychologistId)
       : [...favorites, psychologistId];
-
-    console.log("Updated favorites:", updatedFavorites);
     setFavorites(updatedFavorites);
     if (user) {
       localStorage.setItem(
