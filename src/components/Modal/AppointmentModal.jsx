@@ -39,8 +39,6 @@ const schema = yup.object().shape({
   comment: yup.string().required("Comment is required"),
 });
 
-Modal.setAppElement("body");
-
 const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
   const {
     register,
@@ -57,6 +55,10 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
       comment: "",
     },
   });
+
+  React.useEffect(() => {
+    Modal.setAppElement("body");
+  }, []);
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
@@ -85,9 +87,11 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
       onRequestClose={handleClose}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      ariaHideApp={false}
     >
       <div className={styles.modalContent}>
-        <h2>Make an appointment with a psychologists</h2>
+        <h2>Make an appointment with a psychologist</h2>
         <p className={styles.description}>
           You are on the verge of changing your life for the better. Fill out
           the short form below to book your personal appointment with a
@@ -97,7 +101,7 @@ const AppointmentModal = ({ psychologist, onClose, isOpen }) => {
         <div className={styles.psychologistInfo}>
           <img src={psychologist.avatar_url} alt={psychologist.name} />
           <div className={styles.psychologistInfoContent}>
-            <p className={styles.psychologistName}>Your psychologists</p>
+            <p className={styles.psychologistName}>Your psychologist</p>
             <strong>{psychologist.name}</strong>
           </div>
         </div>

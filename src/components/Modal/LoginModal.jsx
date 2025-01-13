@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../utils/auth";
-import { useEffect } from "react";
 import styles from "./LoginModal.module.css";
 
 const customStyles = {
@@ -39,11 +38,9 @@ const LoginModal = ({ isOpen, onRequestClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Установка элемента приложения для ReactModal
   useEffect(() => {
-    const appElement = document.getElementById("__next");
-    if (appElement) {
-      ReactModal.setAppElement("#__next");
-    }
+    ReactModal.setAppElement("body");
   }, []);
 
   const { login, loading } = useAuth();
@@ -88,9 +85,9 @@ const LoginModal = ({ isOpen, onRequestClose }) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      appElement={document.body}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
+      ariaHideApp={false} // Отключаем aria-hide-app
     >
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onRequestClose}>

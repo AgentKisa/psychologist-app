@@ -7,7 +7,7 @@ import { useAuth } from "../../utils/auth";
 import ReactModal from "react-modal";
 import { updateProfile } from "firebase/auth";
 import styles from "./RegisterModal.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const customStyles = {
   overlay: {
@@ -53,6 +53,10 @@ const RegisterModal = ({ isOpen, onClose }) => {
     },
   });
 
+  useEffect(() => {
+    ReactModal.setAppElement("body");
+  }, []);
+
   const onSubmit = async (data) => {
     try {
       const userCredential = await firebaseRegister(data.email, data.password);
@@ -97,9 +101,10 @@ const RegisterModal = ({ isOpen, onClose }) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onClose}
-      appElement={document.body}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      ariaHideApp={false}
     >
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>
