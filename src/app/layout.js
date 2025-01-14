@@ -16,8 +16,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <Head>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/favicon.png" />
+          {/* <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/favicon.png" /> */}
           <title>Psychologist App</title>
           <meta
             name="description"
