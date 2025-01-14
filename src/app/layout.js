@@ -15,13 +15,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
-        <title>Psychologist App</title>
-        <meta
-          name="description"
-          content="This project is an application for searching and booking consultations with psychologists."
-        />
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/favicon.png" />
+          <title>Psychologist App</title>
+          <meta
+            name="description"
+            content="This project is an application for searching and booking consultations with psychologists."
+          />
+        </Head>
       </head>
       <body className={`${inter.className}`}>
         <AuthProvider>
